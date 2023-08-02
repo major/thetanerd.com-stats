@@ -69,6 +69,7 @@ jobs:
         run: |
           find logs -name "*.gz" | \
             xargs zcat | \
+            grep -v '/ghost' | \
             goaccess - \
               --log-format CLOUDFRONT \
               --date-format CLOUDFRONT \
