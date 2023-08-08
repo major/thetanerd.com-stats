@@ -65,12 +65,31 @@ jobs:
           sudo apt-get -q update
           sudo apt-get -q install -y goaccess
 
-      - name: Run goaccess
+      # - name: Run goaccess
+      #   run: |
+      #     find logs -name "*.gz" | \
+      #       xargs zcat | \
+      #       egrep -v '/ghost|/members' | \
+      #       goaccess - \
+      #         --log-format CLOUDFRONT \
+      #         --date-format CLOUDFRONT \
+      #         --time-format CLOUDFRONT \
+      #         --agent-list \
+      #         --ignore-status=301 \
+      #         --ignore-status=302 \
+      #         --ignore-crawlers \
+      #         --anonymize-ip \
+      #         --http-protocol=no \
+      #         --http-method=no \
+      #         --no-query-string \
+      #         --output public/index.html
+
+      - name: Run goaccess via container
         run: |
           find logs -name "*.gz" | \
             xargs zcat | \
             egrep -v '/ghost|/members' | \
-            goaccess - \
+            docker run -p 7890:7890 --rm -i -e LANG=$LANG docker.io/allinurl/goaccess \
               --log-format CLOUDFRONT \
               --date-format CLOUDFRONT \
               --time-format CLOUDFRONT \
@@ -82,8 +101,8 @@ jobs:
               --http-protocol=no \
               --http-method=no \
               --no-query-string \
-              --output public/index.html
-
+              --output html - > public/index.html
+              
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
