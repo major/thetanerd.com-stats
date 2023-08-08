@@ -56,34 +56,6 @@ jobs:
       - name: Download log files
         run: aws s3 sync --size-only s3://thetanerd.com-logs/ logs/
 
-      - name: Install goaccess
-        run: |
-          wget -O - https://deb.goaccess.io/gnugpg.key | gpg --dearmor \
-              | sudo tee /usr/share/keyrings/goaccess.gpg >/dev/null
-          echo "deb [signed-by=/usr/share/keyrings/goaccess.gpg arch=$(dpkg --print-architecture)] https://deb.goaccess.io/ $(lsb_release -cs) main" \
-              | sudo tee /etc/apt/sources.list.d/goaccess.list
-          sudo apt-get -q update
-          sudo apt-get -q install -y goaccess
-
-      # - name: Run goaccess
-      #   run: |
-      #     find logs -name "*.gz" | \
-      #       xargs zcat | \
-      #       egrep -v '/ghost|/members' | \
-      #       goaccess - \
-      #         --log-format CLOUDFRONT \
-      #         --date-format CLOUDFRONT \
-      #         --time-format CLOUDFRONT \
-      #         --agent-list \
-      #         --ignore-status=301 \
-      #         --ignore-status=302 \
-      #         --ignore-crawlers \
-      #         --anonymize-ip \
-      #         --http-protocol=no \
-      #         --http-method=no \
-      #         --no-query-string \
-      #         --output public/index.html
-
       - name: Run goaccess via container
         run: |
           find logs -name "*.gz" | \
