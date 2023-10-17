@@ -27,7 +27,7 @@ jobs:
           timezoneLinux: "America/Chicago"
     
       - name: Checkout
-        uses: actions/checkout@v4.1.0
+        uses: actions/checkout@v4.1.1
 
       - name: Download logs from artifact
         uses: dawidd6/action-download-artifact@v2
