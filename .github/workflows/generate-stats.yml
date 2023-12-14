@@ -85,7 +85,7 @@ jobs:
           zstd --rm -T0 logs.tar
 
       - name: Store log tarball in artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: logs-tarball
           path: logs.tar.zst
