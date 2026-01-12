@@ -10,11 +10,11 @@
   "timezone": "America/Chicago",
   "prConcurrentLimit": 10,
   "labels": ["dependencies"],
+  "platformAutomerge": true,
   "packageRules": [
     {
-      "description": "Automerge non-major GitHub Actions",
+      "description": "Automerge all GitHub Actions updates",
       "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["minor", "patch", "digest"],
       "automerge": true,
       "automergeType": "pr"
     },
@@ -22,11 +22,6 @@
       "description": "Group all GitHub Actions updates",
       "matchManagers": ["github-actions"],
       "groupName": "GitHub Actions"
-    },
-    {
-      "description": "Require approval for major updates",
-      "matchUpdateTypes": ["major"],
-      "dependencyDashboardApproval": true
     }
   ]
 }
