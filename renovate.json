@@ -53,6 +53,7 @@
       "matchDatasources": [
         "docker"
       ],
+      "pinDigests": false,
       "automerge": true,
       "automergeType": "pr"
     }
