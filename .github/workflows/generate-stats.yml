@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v4.1.1
 
       - name: Download logs from artifact
-        uses: dawidd6/action-download-artifact@v3
+        uses: dawidd6/action-download-artifact@v8
         with:
           name: logs-tarball
           if_no_artifact_found: warn
@@ -60,7 +60,7 @@ jobs:
         run: |
           find logs -name "*.gz" | \
             xargs zcat | \
-            egrep -v '/ghost|/members' | \
+            grep -Ev '/ghost|/members' | \
             docker run -p 7890:7890 --rm -i -e LANG=$LANG docker.io/allinurl/goaccess \
               --log-format CLOUDFRONT \
               --date-format CLOUDFRONT \
