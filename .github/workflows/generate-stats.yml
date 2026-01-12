@@ -24,12 +24,9 @@ defaults:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      TZ: America/Chicago
     steps:
-      - name: Set time zone
-        uses: szenius/set-timezone@v2.0
-        with:
-          timezoneLinux: "America/Chicago"
-    
       - name: Checkout
         uses: actions/checkout@v4
 
