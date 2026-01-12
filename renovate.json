@@ -19,11 +19,11 @@
     {
       "customType": "regex",
       "description": "Update Docker images in workflow shell commands",
-      "managerFilePatterns": [
-        "/^\\.github/workflows/.*\\.ya?ml$/"
+      "fileMatch": [
+        "^\\.github/workflows/.*\\.ya?ml$"
       ],
       "matchStrings": [
-        "docker run[^\\n]*(?<depName>[a-z0-9./-]+):(?<currentValue>[a-z0-9.-]+)\\s"
+        "docker\\.io\\/(?<depName>[a-z0-9]+(?:[._-][a-z0-9]+)*\\/[a-z0-9]+(?:[._-][a-z0-9]+)*):(?<currentValue>[0-9]+(?:\\.[0-9]+)*)"
       ],
       "datasourceTemplate": "docker"
     }
