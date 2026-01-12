@@ -77,7 +77,7 @@ jobs:
               
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
 
       - name: Create log tarball
         run: |
@@ -91,7 +91,7 @@ jobs:
           path: logs.tar.zst
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./public
 
