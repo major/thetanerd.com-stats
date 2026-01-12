@@ -11,6 +11,15 @@
   "prConcurrentLimit": 10,
   "labels": ["dependencies"],
   "platformAutomerge": true,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Update Docker images in workflow shell commands",
+      "fileMatch": ["^\\.github/workflows/.*\\.ya?ml$"],
+      "matchStrings": ["docker run[^\\n]*(?<depName>[a-z0-9./-]+):(?<currentValue>[a-z0-9.-]+)\\s"],
+      "datasourceTemplate": "docker"
+    }
+  ],
   "packageRules": [
     {
       "description": "Automerge all GitHub Actions updates",
@@ -22,6 +31,13 @@
       "description": "Group all GitHub Actions updates",
       "matchManagers": ["github-actions"],
       "groupName": "GitHub Actions"
+    },
+    {
+      "description": "Automerge Docker image updates",
+      "matchManagers": ["custom.regex"],
+      "matchDatasources": ["docker"],
+      "automerge": true,
+      "automergeType": "pr"
     }
   ]
 }
