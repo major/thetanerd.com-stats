@@ -10,7 +10,8 @@
     "before 5am on monday"
   ],
   "timezone": "America/Chicago",
-  "prConcurrentLimit": 10,
+  "prConcurrentLimit": 0,
+  "branchConcurrentLimit": 0,
   "labels": [
     "dependencies"
   ],
