@@ -62,7 +62,7 @@ jobs:
           find logs -name "*.gz" | \
             xargs zcat | \
             grep -Ev '/ghost|/members' | \
-            docker run --rm -i -e LANG=$LANG docker.io/allinurl/goaccess:1.10.1 \
+            docker run --rm -i -e LANG=$LANG docker.io/allinurl/goaccess:1.10.2 \
               --log-format CLOUDFRONT \
               --date-format CLOUDFRONT \
               --time-format CLOUDFRONT \
